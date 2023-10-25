@@ -4,7 +4,7 @@ page 50100 "Student App List"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Student Application Table";
-    CardPageId="Student App Card";
+    CardPageId = "Student App Card";
     layout
     {
         area(Content)
@@ -27,6 +27,21 @@ page 50100 "Student App List"
 
                 }
                 field(Age; Rec.Age)
+                {
+                    ApplicationArea = All;
+
+                }
+                field("Course Type"; Rec."Course Type")
+                {
+                    ApplicationArea = All;
+
+                }
+                field("Programme Name"; Rec."Programme Name")
+                {
+                    ApplicationArea = All;
+
+                }
+                field("Prefered Intake"; Rec."Prefered Intake")
                 {
                     ApplicationArea = All;
 

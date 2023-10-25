@@ -65,6 +65,7 @@ page 50102 "Student App Card"
 
                 }
 
+
             }
             group("Permanent Address")
             {
@@ -90,6 +91,23 @@ page 50102 "Student App Card"
             }
             group("Parent/Guardian Information")
             {
+                field(Name; Rec.Name)
+                {
+
+                }
+                field(PhoneNumber; Rec.PhoneNumber)
+                {
+
+                }
+                field(Ocupation; Rec.Ocupation)
+                {
+
+                }
+                field("Mortality Status"; Rec."Mortality Status")
+                {
+
+                }
+
 
             }
             part(lines; "Students line part")
@@ -99,7 +117,31 @@ page 50102 "Student App Card"
 
             }
 
+            group("Educational Plans")
+            {
+                field("Course Type"; Rec."Course Type")
+                {
+                    ApplicationArea = all;
 
+                }
+                field("Programme Name"; Rec."Programme Name")
+                {
+                    ApplicationArea = all;
+
+                }
+
+                field("Mode of Study"; Rec."Mode of Study")
+                {
+                    ApplicationArea = all;
+
+                }
+                field("Prefered Intake"; Rec."Prefered Intake")
+                {
+                    ApplicationArea = all;
+
+                }
+
+            }
         }
     }
 

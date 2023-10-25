@@ -10,31 +10,41 @@ table 50100 "Student Application Table"
         field(1; "Application No."; Code[20])
         {
             DataClassification = ToBeClassified;
-            Editable= false;
+            Editable = false;
 
         }
         field(4; "First Name"; Text[30])
         {
             DataClassification = ToBeClassified;
+            Trigger OnValidate()
+            begin
+                "Full Name" := "First Name" + '' + "Middle Name" + '' + Surname;
+            end;
         }
         field(6; "Middle Name"; Text[30])
         {
             DataClassification = ToBeClassified;
+            Trigger OnValidate()
+            begin
+                "Full Name" := "First Name" + ' ' + "Middle Name" + ' ' + "Surname";
+
+
+            end;
         }
         field(8; Surname; Text[30])
         {
             DataClassification = ToBeClassified;
+            Trigger OnValidate()
+            begin
+                "Full Name" := "First Name" + ' ' + "Middle Name" + ' ' + "Surname";
+
+            end;
         }
         field(10; "Full Name"; Text[50])
         {
             DataClassification = ToBeClassified;
             Editable = false;
-            Trigger OnValidate()
-            begin
-                fullName := "First Name" + ' ' + "Middle Name" + ' ' + "Surname";
-                fullName := "Full Name";
-                Rec.Modify();
-            end;
+
 
         }
         field(12; Gender; Enum Gender)
@@ -94,6 +104,47 @@ table 50100 "Student Application Table"
             DataClassification = ToBeClassified;
         }
 
+        //guardian
+        field(28; Name; Text[30])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Parent Name';
+        }
+        field(29; "PhoneNumber"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Phone Number';
+        }
+        field(30; Ocupation; Text[30])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Ocupation ';
+        }
+        field(31; "Mortality Status"; Enum "Parents status")
+        {
+
+        }//
+         //Educations plans
+        field(27; "Course Type"; Enum "Course Type")
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(32; "Programme Name"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(33; "Mode of Study"; Option)
+        {
+            OptionMembers = "Institution-Based E-learning Part-Time";
+        
+        }
+        field(34; "Prefered Intake"; Enum Intakes)
+        {
+            DataClassification = ToBeClassified;
+        }
+
+
     }
 
     keys
@@ -105,17 +156,16 @@ table 50100 "Student Application Table"
     }
     var
         calcage: Integer;
-        fullName: Text;
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        StAppNoSeries:Record "Students Setup";
+        StAppNoSeries: Record "Students Setup";
 
-        trigger OnInsert()
-        begin
-            if "Application No."='' then begin
-                StAppNoSeries.Get();
-                NoSeriesMgt.InitSeries(StAppNoSeries."No.Series",StAppNoSeries."No.Series",WorkDate(),"Application No.",StAppNoSeries."No.Series");
-            end;
-            
+    trigger OnInsert()
+    begin
+        if "Application No." = '' then begin
+            StAppNoSeries.Get();
+            NoSeriesMgt.InitSeries(StAppNoSeries."No.Series", StAppNoSeries."No.Series", WorkDate(), "Application No.", StAppNoSeries."No.Series");
         end;
+
+    end;
 
 }

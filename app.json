@@ -21,7 +21,7 @@
     }
   ],
   "showMyCode": true,
-  "runtime": "3.0",
+  "runtime": "4.0",
   "features": [
     "NoImplicitWith"
   ]

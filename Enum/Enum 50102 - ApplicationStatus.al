@@ -1,10 +1,6 @@
 enum 50102 "Application Status"
 {
     Extensible = true;
-
-    value(0; "''")
-    {
-    }
     value(1; Submitted)
     {
     }
