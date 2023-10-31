@@ -1,33 +1,27 @@
-page 50104 "Students Setup"
+page 50112 "School card"
 {
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "Students Setup";
-    CaptionML = ENU='Student Setup', DEU='Schüler-Setup';
-    InsertAllowed = false;
-    DeleteAllowed = false;
-    Editable = true;
-
+    SourceTable = "Students School";
 
     layout
     {
         area(Content)
         {
-            group(General)
+            group(GroupName)
             {
-                field("Minimum Age"; Rec."Minimum Age")
+                field("School code"; Rec."School code")
                 {
-                    
-                }
+                    ApplicationArea = All;
 
-                field("Maximum Age"; Rec."Maximum Age")
-                {
                 }
-            }
-            group("No. Series")
-            {
-                field("No.Series"; Rec."No.Series")
+                field("School Name"; Rec."School Name")
+                {
+                    ApplicationArea = All;
+
+                }
+                field(Department; Rec.Department)
                 {
                     ApplicationArea = All;
 

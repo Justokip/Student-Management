@@ -34,14 +34,27 @@ page 50105 StudentsRoleCenter
                 {
                     RunObject = Page "Student App List";
                 }
+                action("Approved Applicants")
+                {
+                    RunObject = page "Students Approved";
+                }
             }
         }
         area(Embedding)
         {
-            action(Hello)
+            action(Course)
             {
-
+                RunObject = Page "Course Page";
             }
+            action(Schools)
+            {
+                RunObject = Page "School List";
+            }
+            action(Department)
+            {
+                RunObject = Page "Department List";
+            }
+
         }
     }
 

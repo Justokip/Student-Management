@@ -29,6 +29,7 @@ table 50102 "Students line"
             Caption = 'MEAN GRADE';
         }
     }
+    
 
     keys
     {

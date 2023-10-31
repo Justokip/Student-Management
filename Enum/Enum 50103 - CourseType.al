@@ -11,4 +11,5 @@ enum 50103 "Course Type"
     value(3; Certificate)
     {
     }
+    
 }

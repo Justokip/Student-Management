@@ -1,37 +1,37 @@
-page 50104 "Students Setup"
+page 50110 "Department Card"
 {
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "Students Setup";
-    CaptionML = ENU='Student Setup', DEU='Schüler-Setup';
-    InsertAllowed = false;
-    DeleteAllowed = false;
-    Editable = true;
-
+    SourceTable = Department;
 
     layout
     {
         area(Content)
         {
-            group(General)
+            group(GroupName)
             {
-                field("Minimum Age"; Rec."Minimum Age")
-                {
-                    
-                }
 
-                field("Maximum Age"; Rec."Maximum Age")
-                {
-                }
-            }
-            group("No. Series")
-            {
-                field("No.Series"; Rec."No.Series")
+                field("Department Code"; Rec."Department Code")
                 {
                     ApplicationArea = All;
 
                 }
+                field("Department Name"; Rec."Department Name")
+                {
+                    ApplicationArea = All;
+
+                }
+                // field("Program Level"; Rec."Program Level")
+                // {
+                //     ApplicationArea = All;
+
+                // }
+                // field(Course; Rec.Course)
+                // {
+                //     ApplicationArea = All;
+
+                // }
             }
         }
     }

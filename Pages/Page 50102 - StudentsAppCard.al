@@ -64,6 +64,11 @@ page 50102 "Student App Card"
                     ApplicationArea = All;
 
                 }
+                field("Application Status"; Rec."Application Status")
+                {
+                    ApplicationArea = All;
+
+                }
 
 
             }
@@ -149,18 +154,45 @@ page 50102 "Student App Card"
     {
         area(Processing)
         {
-            action(ActionName)
+            action("Send Application")
             {
-                ApplicationArea = All;
+
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                Image = SendApprovalRequest;
+                ToolTip = 'Sends the application for approval.';
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
+                    IF StudentApprovalManagement.CheckStudentsApprovalWorkflowEnabled(Rec) then
+                        StudentApprovalManagement.OnSendStudentsAppForApproval(Rec);
+
+                end;
+            }
+            action("Cancel Application")
+            {
+                ApplicationArea = All;
+                Caption = 'Cancel Application';
+                Promoted = true;
+                Image = SendApprovalRequest;
+                ToolTip = 'Cancels the application.';
+                PromotedCategory = Process;
+                trigger OnAction()
+                begin
+                    StudentApprovalManagement.OnCancelStudentsAppApprovalRequest(Rec);
 
                 end;
             }
         }
     }
-
     var
-        myInt: Integer;
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        StudentApprovalManagement: Codeunit "Student Approval Management";
+        OpenApprovalEntriesExistForCurrUser: Boolean;
+        OpenApprovalEntriesExist: Boolean;
+        CanCancelApprovalForRecord: Boolean;
+        CanCancelApprovalForFlow: Boolean;
+        CanRequestApprovalForFlow: Boolean;
+
 }

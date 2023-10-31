@@ -5,15 +5,17 @@ table 50100 "Student Application Table"
 
 
 
+
     fields
     {
         field(1; "Application No."; Code[20])
         {
             DataClassification = ToBeClassified;
             Editable = false;
+            // TableRelation = Customer;
 
         }
-        field(4; "First Name"; Text[30])
+        field(5004; "First Name"; Text[30])
         {
             DataClassification = ToBeClassified;
             Trigger OnValidate()
@@ -21,7 +23,7 @@ table 50100 "Student Application Table"
                 "Full Name" := "First Name" + '' + "Middle Name" + '' + Surname;
             end;
         }
-        field(6; "Middle Name"; Text[30])
+        field(5006; "Middle Name"; Text[30])
         {
             DataClassification = ToBeClassified;
             Trigger OnValidate()
@@ -31,7 +33,7 @@ table 50100 "Student Application Table"
 
             end;
         }
-        field(8; Surname; Text[30])
+        field(5008; Surname; Text[30])
         {
             DataClassification = ToBeClassified;
             Trigger OnValidate()
@@ -40,110 +42,137 @@ table 50100 "Student Application Table"
 
             end;
         }
-        field(10; "Full Name"; Text[50])
+        field(2; "Full Name"; Text[100])
         {
             DataClassification = ToBeClassified;
             Editable = false;
 
 
         }
-        field(12; Gender; Enum Gender)
+        field(50012; Gender; Enum Gender)
         {
             DataClassification = ToBeClassified;
         }
-        field(14; "Date Of Birth"; Date)
+        field(50014; "Date Of Birth"; Date)
         {
             DataClassification = ToBeClassified;
             trigger OnValidate()
+            var
+                StudentSetupRec: Record "Students Setup";
+                MinAge: Integer;
+                MaxAge: Integer;
+                myInt: Integer;
 
             begin
-                calcage := Date2DMY(WorkDate(), 3) - Date2DMY("Date Of Birth", 3);
-                Age := calcage;
-                rec.Modify();
+                if "Date Of Birth" <> 0D then begin
+                    // Retrieve the minimum and maximum age from the "Student Management Setup" table
+                    if StudentSetupRec.Get() then begin
+                        MinAge := StudentSetupRec."Minimum Age";
+                        MaxAge := StudentSetupRec."Maximum Age";
+                        //calculate Age
+                        calcage := Date2DMY(WorkDate(), 3) - Date2DMY("Date Of Birth", 3);
+                        Age := calcage;
+                        rec.Modify();
 
+                        // Check if the age is within the specified range
+                        if (calcage < MinAge) or (calcage > MaxAge) then begin
+                            Error('Applicant age does not meet the requirements.');
+                        end;
+
+                    end;
+
+
+                end;
             end;
         }
-        field(15; Nationality; Code[20])
+        field(5015; Nationality; Code[20])
         {
 
         }
-        field(16; Age; Integer)
+        field(5016; Age; Integer)
         {
             DataClassification = ToBeClassified;
             Editable = false;
 
         }
 
-        field(17; Address; Text[70])
+        field(5; Address; Text[100])
         {
 
         }
-        field(18; "Phone Number"; Integer)
+        field(9; "Phone Number"; Text[30])
         {
             DataClassification = ToBeClassified;
+            Caption = 'Phone No.';
+            ExtendedDatatype = PhoneNo;
         }
-        field(19; Email; Text[75])
+        field(102; Email; Text[80])
         {
 
         }
-        field(20; "Application Date"; Date)
+        field(5020; "Application Date"; Date)
         {
             DataClassification = ToBeClassified;
         }
 
-        field(22; "Application Status"; Enum "Application Status")
+        field(5022; "Application Status"; Enum "Application Status")
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(5024; "PO BOX"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
-        field(24; "PO BOX"; Code[20])
+        field(7; "City/Town"; Text[30])
         {
             DataClassification = ToBeClassified;
-        }
-        field(26; "City/Town"; Text[50])
-        {
-            DataClassification = ToBeClassified;
+            Caption = 'Country/Region Code';
+            TableRelation = "Country/Region";
         }
 
         //guardian
-        field(28; Name; Text[30])
+        field(5028; Name; Text[30])
         {
             DataClassification = ToBeClassified;
             Caption = 'Parent Name';
         }
-        field(29; "PhoneNumber"; Code[20])
+        field(5029; "PhoneNumber"; Code[20])
         {
             DataClassification = ToBeClassified;
             Caption = 'Phone Number';
         }
-        field(30; Ocupation; Text[30])
+        field(5030; Ocupation; Text[30])
         {
             DataClassification = ToBeClassified;
             Caption = 'Ocupation ';
         }
-        field(31; "Mortality Status"; Enum "Parents status")
+        field(5031; "Mortality Status"; Enum "Parents status")
         {
 
         }//
          //Educations plans
-        field(27; "Course Type"; Enum "Course Type")
+        field(5027; "Course Type"; Enum "Course Type")
         {
             DataClassification = ToBeClassified;
+            Caption = 'Program Level';
 
         }
-        field(32; "Programme Name"; Code[20])
+        field(5032; "Programme Name"; Code[50])
         {
             DataClassification = ToBeClassified;
         }
-        field(33; "Mode of Study"; Option)
+        field(5033; "Mode of Study"; Option)
         {
-            OptionMembers = "Institution-Based E-learning Part-Time";
-        
-        }
-        field(34; "Prefered Intake"; Enum Intakes)
-        {
-            DataClassification = ToBeClassified;
-        }
 
+            OptionMembers = "Institution-Based","E-learning","Part-Time";
+            Caption = 'Institution-Based,E-learning,Part-Time';
+
+        }
+        field(5034; "Prefered Intake"; Enum Intakes)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 
