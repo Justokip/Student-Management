@@ -6,19 +6,21 @@ page 50105 StudentsRoleCenter
     {
         area(RoleCenter)
         {
-
+            part(headline; "Headline RC Administrator")
+            {
+                ApplicationArea = Basic, suite;
+            }
+            part(stude; "Student cues Page")
+            {
+                ApplicationArea = all;
+                Caption = 'Management';
+            }
         }
     }
 
     actions
     {
-        area(Creation)
-        {
-            action(ActionBarAction)
-            {
 
-            }
-        }
         area(Processing)
         {
             action("Students Setup")
@@ -34,26 +36,87 @@ page 50105 StudentsRoleCenter
                 {
                     RunObject = Page "Student App List";
                 }
-                action("Approved Applicants")
+                action("Approved/Submitted Student List")
                 {
-                    RunObject = page "Students Approved";
+                    RunObject = Page "Submitted Students";
                 }
+
+            }
+            group(Registration)
+            {
+                action("Students List")
+                {
+                    RunObject = page "Approved Students List";
+                }
+
+                action("Semester Registration")
+                {
+                    RunObject = Page "Student Semester Registration";
+                }
+
+
+            }
+            group("Student Setups")
+            {
+                action("Student Setup")
+                {
+                    RunObject = Page "Students Setup";
+                }
+                action("Fee Structure")
+                {
+                    RunObject = Page "Fee Structure List";
+                }
+
+
+            }
+            group(Administration)
+            {
+
+                action(Course)
+                {
+                    RunObject = Page "Course Page";
+                }
+                action(Schools)
+                {
+                    RunObject = Page "School List";
+                }
+                action(Department)
+                {
+                    RunObject = Page "Department List";
+                }
+                action("Program Level")
+                {
+                    RunObject = Page "Program Level Page";
+                }
+                action("Academic year")
+                {
+                    RunObject = Page "Academic Years";
+                }
+                action(Semeter)
+                {
+                    RunObject = Page Semesters;
+                }
+
+            }
+            group(Finance)
+            {
+                action("Student Invoice")
+                {
+                    RunObject = page "Students Invoices";
+                }
+
+            }
+            group(Reports)
+            {
+                action("Fee Structure Report")
+                {
+                    RunObject = report "Fee Structure Report";
+                }
+
             }
         }
         area(Embedding)
         {
-            action(Course)
-            {
-                RunObject = Page "Course Page";
-            }
-            action(Schools)
-            {
-                RunObject = Page "School List";
-            }
-            action(Department)
-            {
-                RunObject = Page "Department List";
-            }
 
         }
     }

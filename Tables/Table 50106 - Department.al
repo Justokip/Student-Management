@@ -1,7 +1,7 @@
 table 50106 "Department"
 {
     DataClassification = CustomerContent;
-  
+
 
     fields
     {
@@ -15,24 +15,34 @@ table 50106 "Department"
         {
             DataClassification = CustomerContent;
         }
-
-        // field(3; "Program Level"; Enum "Course Type")
-        // {
-        //     DataClassification = ToBeClassified;
-        // }
-
-        // field(4; "Course"; Code[70])
-        // {
-        //     DataClassification = ToBeClassified;
-        // }
+        field(3; "School Name"; Text[100])
+        {
+            DataClassification = CustomerContent;
+            TableRelation = "Students School";
+        }
+        field(6; No; Integer)
+        {
+            AutoIncrement = true;
+        }
     }
 
     keys
     {
-        key(PK;"Department Code")
+        key(PK; "Department Name", No, "Department Code")
         {
             Clustered = true;
         }
-      
+
+    }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Department Name")
+        {
+
+        }
+        fieldgroup(Brick; "Department Name")
+        {
+
+        }
     }
 }

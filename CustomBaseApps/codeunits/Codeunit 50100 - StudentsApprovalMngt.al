@@ -31,6 +31,32 @@ codeunit 50100 "Student Approval Management"
     begin
 
     end;
+    //student invoice
+    procedure CheckStudentInvoiceApprovalsWorkFlowEnable(var Applicant1: Record "Student Invoice"): Boolean
+    begin
+        IF NOT IsStudentInvoiceApprovalsWorkFlowEnable(Applicant1) then
+            Error(NoWorkFlowEnabledErr);
+        exit(true);
+    end;
+
+    procedure IsStudentInvoiceApprovalsWorkFlowEnable(var Applicant1: Record "Student Invoice"): Boolean
+    begin
+        EXIT(WorkFlowManagement.CanExecuteWorkflow(Applicant1, WorkflowEventHandling.RunWorkFlowOnSendStudentInvoiceForApprovalCode()));
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnSendStudentInvoiceForApproval(Var Applicant1: Record "Student Invoice")
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnCancelStudentInvoiceForApproval(var Applicant1: Record "Student Invoice")
+    begin
+
+    end;
+
+
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnPopulateApprovalEntryArgument', '', true, true)]
     local procedure OnPopulateApprovalEntryArgument(VAR RecRef: RecordRef; VAR ApprovalEntryArgument: Record "Approval Entry"; WorkflowStepInstance: Record "Workflow Step Instance")

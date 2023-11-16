@@ -4,7 +4,7 @@ page 50107 "Course Page"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Course Table";
-    CardPageId="Course Card";
+    CardPageId = "Course Card";
 
     layout
     {
@@ -15,6 +15,12 @@ page 50107 "Course Page"
                 field("Course ID"; Rec."Course ID")
                 {
                     ApplicationArea = All;
+
+                }
+                field("Program Level"; Rec."Program Level")
+                {
+                    ApplicationArea = All;
+
 
                 }
 
@@ -28,6 +34,7 @@ page 50107 "Course Page"
                 {
                     ApplicationArea = All;
 
+
                 }
 
                 field(Department; Rec.Department)
@@ -36,7 +43,20 @@ page 50107 "Course Page"
 
 
                 }
-                
+
+                field("Academic Year"; Rec."Academic Year")
+                {
+                    ApplicationArea = All;
+
+
+                }
+                field(Semester; Rec.Semester)
+                {
+                    ApplicationArea = All;
+
+
+                }
+
             }
         }
         area(Factboxes)

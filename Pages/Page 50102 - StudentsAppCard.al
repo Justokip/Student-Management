@@ -4,7 +4,7 @@ page 50102 "Student App Card"
     SourceTable = "Student Application Table";
     ApplicationArea = ALl;
     UsageCategory = Administration;
-    Caption = 'Student Applictaion Card ';
+    Caption = 'Student Application Card ';
 
 
     layout
@@ -39,6 +39,13 @@ page 50102 "Student App Card"
 
 
                 }
+                field(Email;Rec.Email)
+                {
+                    ApplicationArea = All;
+
+
+                }
+
                 field(Gender; Rec.Gender)
                 {
                     ApplicationArea = All;
@@ -62,6 +69,12 @@ page 50102 "Student App Card"
                 field("Phone Number"; Rec."Phone Number")
                 {
                     ApplicationArea = All;
+
+                }
+                field("Application Date";Rec."Application Date")
+                {
+                    ApplicationArea = All;
+
 
                 }
                 field("Application Status"; Rec."Application Status")
@@ -124,17 +137,29 @@ page 50102 "Student App Card"
 
             group("Educational Plans")
             {
-                field("Course Type"; Rec."Course Type")
+               
+                field("Student Category"; Rec."Student Category")
                 {
                     ApplicationArea = all;
 
                 }
-                field("Programme Name"; Rec."Programme Name")
+
+                field(Course; Rec.Course)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Course Name';
+
+                }
+                field(School; Rec.School)
                 {
                     ApplicationArea = all;
 
                 }
+                field(Department; Rec.Department)
+                {
+                    ApplicationArea = all;
 
+                }
                 field("Mode of Study"; Rec."Mode of Study")
                 {
                     ApplicationArea = all;
@@ -165,6 +190,7 @@ page 50102 "Student App Card"
 
                 trigger OnAction()
                 begin
+                    Rec.TestField("Full Name");
                     IF StudentApprovalManagement.CheckStudentsApprovalWorkflowEnabled(Rec) then
                         StudentApprovalManagement.OnSendStudentsAppForApproval(Rec);
 

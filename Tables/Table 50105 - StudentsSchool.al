@@ -8,28 +8,36 @@ table 50105 "Students School"
         field(1; "School code"; Code[20])
         {
             DataClassification = CustomerContent;
-            // DataClassificationProperty = YearID;
-            // DataClassificationMethod = IdNumber;
+
         }
 
         field(2; "School Name"; Text[100])
         {
             DataClassification = CustomerContent;
         }
-
-        field(3; "Department"; code[50])
+        field(3; No; Integer)
         {
-            DataClassification = CustomerContent;
+            AutoIncrement = true;
         }
 
-       
     }
 
     keys
     {
-        key(PK;"School code")
+        key(PK; "School Name", "School code")
         {
             Clustered = true;
+        }
+    }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "School Name")
+        {
+
+        }
+        fieldgroup(Brick; "School Name")
+        {
+
         }
     }
 }

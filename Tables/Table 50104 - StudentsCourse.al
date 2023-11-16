@@ -10,24 +10,34 @@ table 50104 "Course Table"
             DataClassification = ToBeClassified;
 
         }
+        field(9; "Pk"; Integer)
+        {
+            AutoIncrement = true;
+        }
 
         field(2; "Course Name"; Text[100])
         {
             DataClassification = ToBeClassified;
+
+        }
+        field(8; "Program Level"; Code[100])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Program Level";
         }
 
-        field(3; "School"; code[50])
+        field(3; "School"; Text[100])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Students School";
         }
 
-        field(4; Department; Code[50])
+        field(4; Department; Text[100])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Department;
+            TableRelation = Department where("School Name" = field(School));
         }
-        field(5; "Academic Year"; Integer)
+        field(5; "Academic Year"; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Academic Year";
@@ -48,7 +58,7 @@ table 50104 "Course Table"
 
     keys
     {
-        key(PK; "Course ID")
+        key(PK; "Course ID" )
         {
             Clustered = true;
         }

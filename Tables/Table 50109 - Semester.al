@@ -1,4 +1,4 @@
-table 50111 "Semester Registration"
+table 50119 "Semester Registration"
 {
     DataClassification = ToBeClassified;
     DataPerCompany = true;
@@ -6,28 +6,39 @@ table 50111 "Semester Registration"
 
     fields
     {
-        field(1; "ID" ; Code[20])
+        field(1; "Semester code"; Code[10])
         {
-            DataClassification = ToBeClassified;
-          
+            DataClassification = CustomerContent;
+            Caption = 'Semester Code';
+
+        }
+        field(2; "Semester Name"; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Semester';
         }
 
-        field(2; "Student" ; Code[20])
+    }
+    keys
+    {
+        key(PK; "Semester Name", "Semester code")
+
         {
-            DataClassification = ToBeClassified;
-            
+            Clustered = true;
+
         }
 
-        field(3; "Semester" ; Code[20])
+    }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Semester Name")
         {
-            DataClassification = ToBeClassified;
-            TableRelation = "Semester Registration".ID;
-        }
 
-        field(4; "Units" ; Code[20])
+        }
+        fieldgroup(Brick; "Semester Name")
         {
-            DataClassification = ToBeClassified;
-            TableRelation= "Students Units Setup"."Unit code"; 
+
         }
     }
 }
+

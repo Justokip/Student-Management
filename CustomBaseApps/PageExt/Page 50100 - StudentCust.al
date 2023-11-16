@@ -18,6 +18,7 @@ pageextension 50100 "Student Cust Ext" extends "Customer Card"
             {
                 ApplicationArea = All;
             }
+            
         }
 
     }

@@ -6,16 +6,41 @@ table 50108 "Academic Year"
 
     fields
     {
-        field(1; "ID" ; Code[20])
+      
+        field(2; "Academic Year"; code[20])
         {
-            DataClassification = ToBeClassified;
-           
+            DataClassification = CustomerContent;
+            Caption = 'Academic Year';
+
         }
-        
-        field(2; "Course" ; Code[20])
+        field(3;"Start Date";Date)
         {
-            DataClassification = ToBeClassified;
-            TableRelation= "Course Table"."Course ID";
+            DataClassification = CustomerContent;
+
+        }
+         field(4;"End Date";Date)
+        {
+            DataClassification = CustomerContent;
+
+        }
+
+    }
+    keys
+    {
+        key(PK; "Academic Year")
+        {
+            Clustered = true;
+        }
+    }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Academic Year")
+        {
+
+        }
+        fieldgroup(Brick; "Academic Year")
+        {
+
         }
     }
 }

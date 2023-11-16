@@ -21,6 +21,11 @@ page 50100 "Student App List"
                     ApplicationArea = All;
 
                 }
+                field(Email;Rec.Email)
+                {
+                    ApplicationArea = All;
+
+                }
                 field(Gender; Rec.Gender)
                 {
                     ApplicationArea = All;
@@ -31,12 +36,8 @@ page 50100 "Student App List"
                     ApplicationArea = All;
 
                 }
-                field("Course Type"; Rec."Course Type")
-                {
-                    ApplicationArea = All;
-
-                }
-                field("Programme Name"; Rec."Programme Name")
+              
+                field(Course;Rec.Course)
                 {
                     ApplicationArea = All;
 

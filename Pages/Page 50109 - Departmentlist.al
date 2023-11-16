@@ -4,7 +4,7 @@ page 50109 "Department List"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = Department;
-    CardPageId="Department Card";
+
 
     layout
     {
@@ -12,12 +12,17 @@ page 50109 "Department List"
         {
             repeater(GroupName)
             {
-                field("Department Code";Rec."Department Code")
+                field("Department Code"; Rec."Department Code")
                 {
                     ApplicationArea = All;
 
                 }
-                field("Department Name";Rec."Department Name")
+                field("Department Name"; Rec."Department Name")
+                {
+                    ApplicationArea = All;
+
+                }
+                field("School Name"; Rec."School Name")
                 {
                     ApplicationArea = All;
 

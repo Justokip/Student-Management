@@ -17,6 +17,7 @@ codeunit 50103 StudentWorkFlowEventResponse
                     Student."Application Status" := Student."Application Status"::Open;
                     Student.Modify;
                     Handled := true;
+
                 end;
 
         end;
@@ -26,14 +27,16 @@ codeunit 50103 StudentWorkFlowEventResponse
     local procedure OnSendStudentsAppForApproval(RecRef: RecordRef; var Handled: Boolean)
     var
         Student: Record "Student Application Table";
-
+        StudentSetupp: Record "Students Setup";
+        NoSeriesMng: Codeunit NoSeriesManagement;
+        ErrorStup: Label 'Could not find number series field in the setup';
     begin
         case RecRef.Number OF
             Database::"Student Application Table":
 
                 begin
                     RecRef.SetTable(Student);
-                    Student."Application Status" := Student."Application Status"::"Submitted";
+                    Student."Application Status" := Student."Application Status"::Submitted;
                     Student.Modify;
                     Handled := true;
                 end;
@@ -56,32 +59,34 @@ codeunit 50103 StudentWorkFlowEventResponse
         end;
 
     end;
+
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Approvals Mgmt.", 'OnApproveApprovalRequest', '', true, true)]
     local procedure OnApproveApprovalRequest(var ApprovalEntry: Record "Approval Entry")
     var
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        Student: Record "Student Application Table";
         RecRef: RecordRef;
-        Students: Record "Student Application Table";
-        ApprovalMgmnt: Codeunit "Approvals Mgmt.";
-        StudentNoSr: Record "Students Setup";
+        StudentSetupp: Record "Students Setup";
         NoSeriesMng: Codeunit NoSeriesManagement;
         ErrorStup: Label 'Could not find number series field in the setup';
-        Customer: Record Customer;
+        CustomerRec: Record Customer;
+        StudentTransfer: Codeunit "Student Transfer";
     begin
         RecRef.Get(ApprovalEntry."Record ID to Approve");
         case RecRef.Number of
             Database::"Student Application Table":
                 begin
-                    RecRef.SetTable(Students);
-                    if not ApprovalMgmnt.HasOpenOrPendingApprovalEntries(ApprovalEntry."Record ID to Approve") then begin
-                        Students."Application Status" := Students."Application Status"::Approved;
-                        Students.Modify();
-                    end;
-                    Students.Modify();
-                    Customer.INIT;
-                    Customer.TransferFields(Students, true);
-                    Customer.Insert();
-                end;
+                    RecRef.SetTable(Student);
+                    if not ApprovalsMgmt.HasOpenOrPendingApprovalEntries(ApprovalEntry."Record ID to Approve") then begin
+                        Student."Application Status" := Student."Application Status"::Submitted;
+                        StudentTransfer.StudentApproved(Student);
 
+                        StudentSetupp.Get();
+                        StudentSetupp.TestField("No.Seriess");
+                        Student.Modify;
+                        // Handled := true;
+                    end;
+                end;
         end;
     end;
 
@@ -118,17 +123,7 @@ codeunit 50103 StudentWorkFlowEventResponse
 
 
 
-//StudentNoSr: Record "STDN Student Setup";
-//NoSeriesMng: Codeunit NoSeriesManagement;
-//ErrorStup: Label 'Could not find number series field in the setup';
-//
-// StudentNoSr.Get();
-// StudentNoSr.TestField("Student Adm No.");
-// if (Students."Adm." = '') then begin
-//     Students."Adm." := NoSeriesMng.GetNextNo(StudentNoSr."Student Adm No.", 0D, true);
-//     Students.Modify();
 
-// end;
 
 
 

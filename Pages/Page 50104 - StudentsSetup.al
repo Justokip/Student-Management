@@ -4,7 +4,7 @@ page 50104 "Students Setup"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "Students Setup";
-    CaptionML = ENU='Student Setup', DEU='Schüler-Setup';
+    CaptionML = ENU = 'Student Setup', DEU = 'Schüler-Setup';
     InsertAllowed = false;
     DeleteAllowed = false;
     Editable = true;
@@ -18,7 +18,7 @@ page 50104 "Students Setup"
             {
                 field("Minimum Age"; Rec."Minimum Age")
                 {
-                    
+
                 }
 
                 field("Maximum Age"; Rec."Maximum Age")
@@ -32,6 +32,33 @@ page 50104 "Students Setup"
                     ApplicationArea = All;
 
                 }
+                field("No.Seriess"; Rec."No.Seriess")
+                {
+                    ApplicationArea = All;
+
+
+                }
+                field("Entry No."; Rec."Entry No.")
+                {
+                    ApplicationArea = All;
+
+
+                }
+                field("Reg No."; Rec."Reg No.")
+                {
+                    ApplicationArea = All;
+
+
+                }
+                field("Invoice Code"; Rec."Invoice Code")
+                {
+                    ApplicationArea = All;
+
+
+                }
+
+
+
             }
         }
     }

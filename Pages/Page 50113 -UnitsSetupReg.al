@@ -1,6 +1,8 @@
 page 50113 "Units line part"
 {
-    PageType = ListPart;
+    PageType = CardPart;
+    ApplicationArea = All;
+    UsageCategory = Lists;
     SourceTable = "Students Units Setup";
     Caption = 'Units';
 
@@ -13,37 +15,30 @@ page 50113 "Units line part"
             repeater(Group)
             {
 
-                field("Unit ID";Rec."Unit Code")
+                field("Unit Code"; Rec."Unit Code")
                 {
                     ApplicationArea = All;
                 }
-                field("Unit Name";Rec."Unit Name")
+                field("Unit Name"; Rec."Unit Name")
                 {
                     ApplicationArea = All;
+
                 }
-                field(Course;Rec.Course)
+                field("Course Name"; Rec."Course Name")
                 {
                     ApplicationArea = All;
+
                 }
-                
+                field(Semester; Rec.Semester)
+                {
+                    ApplicationArea = All;
+
+                }
+
             }
         }
 
     }
 
-    actions
-    {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-                ApplicationArea = All;
 
-                trigger OnAction();
-                begin
-
-                end;
-            }
-        }
-    }
 }

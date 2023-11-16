@@ -9,7 +9,6 @@
             "server": "http://localhost:8080/justus/",
             "serverInstance": "justus",
             "authentication": "Windows",
-            "startupObjectId": 50100,
             "startupObjectType": "Page",
             "breakOnError": "All",
             "port": 6064,

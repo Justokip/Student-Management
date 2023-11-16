@@ -1,35 +1,32 @@
-table 50107 "Students Units Setup"
+table 50110 "Program Level"
 {
     DataClassification = ToBeClassified;
-    Caption = 'Students Units Setup';
 
     fields
     {
-        field(1; "Unit Code"; Code[20])
+        field(1; "Level no."; Code[20])
         {
             DataClassification = ToBeClassified;
 
         }
-
-        field(2; "Unit Name"; Text[100])
+        field(2; "Program level"; Code[20])
         {
             DataClassification = ToBeClassified;
+
         }
-           field(4; "Course" ; Code[20])
+        field(3; Duration; Integer)
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Course Table"."Course ID";
-        }
 
-     
+        }
     }
 
     keys
     {
-        key(PK; "Unit Code")
+        key(Key1; "Program level")
         {
             Clustered = true;
         }
     }
-}
 
+}

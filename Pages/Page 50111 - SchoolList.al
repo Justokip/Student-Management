@@ -4,8 +4,7 @@ page 50111 "School List"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Students School";
-    CardPageId = "School card";
-
+    
     layout
     {
         area(Content)
@@ -18,11 +17,6 @@ page 50111 "School List"
 
                 }
                 field("School Name"; Rec."School Name")
-                {
-                    ApplicationArea = All;
-
-                }
-                field(Department; Rec.Department)
                 {
                     ApplicationArea = All;
 

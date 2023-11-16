@@ -1,14 +1,10 @@
-page 50106 "Students Approved"
+page 50122 "Submitted Students"
 {
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Student Application Table";
-    //CardPageId = "Student App Card";
-    InsertAllowed=false;
-    DeleteAllowed=false;
-    Editable=false;
-    SourceTableView= sorting("Application No.")order (descending) where("Application Status"= filter(Approved));
+    SourceTableView = sorting("Application No.") order(descending) where("Application Status" = filter(Submitted));
     layout
     {
         area(Content)
@@ -25,6 +21,11 @@ page 50106 "Students Approved"
                     ApplicationArea = All;
 
                 }
+                field(Email;Rec.Email)
+                {
+                    ApplicationArea = All;
+
+                }
                 field(Gender; Rec.Gender)
                 {
                     ApplicationArea = All;
@@ -35,12 +36,8 @@ page 50106 "Students Approved"
                     ApplicationArea = All;
 
                 }
-                field("Course Type"; Rec."Course Type")
-                {
-                    ApplicationArea = All;
-
-                }
-                field("Programme Name"; Rec."Programme Name")
+              
+                field(Course;Rec.Course)
                 {
                     ApplicationArea = All;
 
@@ -57,13 +54,14 @@ page 50106 "Students Approved"
                 }
 
             }
+     
         }
         area(Factboxes)
         {
-
+            
         }
     }
-
+    
     actions
     {
         area(Processing)
@@ -71,10 +69,10 @@ page 50106 "Students Approved"
             action(ActionName)
             {
                 ApplicationArea = All;
-
+                
                 trigger OnAction();
                 begin
-
+                    
                 end;
             }
         }

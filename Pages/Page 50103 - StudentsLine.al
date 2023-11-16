@@ -13,6 +13,10 @@ page 50103 "Students line part"
             repeater(Group)
             {
 
+                field("No."; Rec."No.")
+                {
+                    ApplicationArea = All;
+                }
                 field(Institution; Rec.Institution)
                 {
                     ApplicationArea = All;

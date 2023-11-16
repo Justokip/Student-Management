@@ -8,7 +8,7 @@ table 50100 "Student Application Table"
 
     fields
     {
-        field(1; "Application No."; Code[20])
+        field(5038; "Application No."; Code[20])
         {
             DataClassification = ToBeClassified;
             Editable = false;
@@ -20,7 +20,7 @@ table 50100 "Student Application Table"
             DataClassification = ToBeClassified;
             Trigger OnValidate()
             begin
-                "Full Name" := "First Name" + '' + "Middle Name" + '' + Surname;
+                "Full Name" := "First Name" + ' ' + "Middle Name" + '' + Surname;
             end;
         }
         field(5006; "Middle Name"; Text[30])
@@ -61,7 +61,7 @@ table 50100 "Student Application Table"
                 StudentSetupRec: Record "Students Setup";
                 MinAge: Integer;
                 MaxAge: Integer;
-                myInt: Integer;
+
 
             begin
                 if "Date Of Birth" <> 0D then begin
@@ -108,6 +108,7 @@ table 50100 "Student Application Table"
         }
         field(102; Email; Text[80])
         {
+            DataClassification = CustomerContent;
 
         }
         field(5020; "Application Date"; Date)
@@ -152,16 +153,6 @@ table 50100 "Student Application Table"
 
         }//
          //Educations plans
-        field(5027; "Course Type"; Enum "Course Type")
-        {
-            DataClassification = ToBeClassified;
-            Caption = 'Program Level';
-
-        }
-        field(5032; "Programme Name"; Code[50])
-        {
-            DataClassification = ToBeClassified;
-        }
         field(5033; "Mode of Study"; Option)
         {
 
@@ -169,10 +160,60 @@ table 50100 "Student Application Table"
             Caption = 'Institution-Based,E-learning,Part-Time';
 
         }
+        field(5070; "Program Level"; code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Program Level";
+        }
         field(5034; "Prefered Intake"; Enum Intakes)
         {
             DataClassification = ToBeClassified;
         }
+        field(5035; Course; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Course Name';
+            TableRelation = "Course Table";
+            trigger OnValidate()
+            var
+                Courses: Record "Course Table";
+            begin
+                if Courses.Get(Course) then begin
+                    Course := Courses."Course Name";
+                    School := Courses.School;
+                    Department := Courses.Department;
+
+                end;
+
+
+            end;
+
+        }
+        field(5036; School; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(5037; Department; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(1; "Adm no."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(3009; "Customer Type"; option)
+        {
+            OptionMembers = Customers,Students;
+            OptionCaption = 'Customers, Students';
+            DataClassification = CustomerContent;
+        }
+        field(5039; "Student Category"; Enum "Student Category")
+        {
+            DataClassification = ToBeClassified;
+        }
+
 
     }
 
