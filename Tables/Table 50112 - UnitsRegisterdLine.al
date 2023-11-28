@@ -13,7 +13,7 @@ table 50112 "Registered units"
         field(6; "Unit Code"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = "Students Units Setup"; //where("Course Name" =field("Course Name")); //, Semester = field(Semester));
+            TableRelation = "Students Units Setup" where("Course Name" = field("Course Name"), Semester = field(Semester));
             trigger OnValidate()
             var
                 StudentsUnitsSetup: Record "Students Units Setup";
@@ -51,6 +51,11 @@ table 50112 "Registered units"
         {
             DataClassification = ToBeClassified;
         }
+        field(3; "No"; Integer)
+        {
+            AutoIncrement = true;
+
+        }
 
 
 
@@ -58,7 +63,7 @@ table 50112 "Registered units"
 
     keys
     {
-        key(Key1; "Unit Code", "Course Name", "Unit Name")
+        key(Key1; "Unit Code", No, "Course Name", "Unit Name")
         {
             Clustered = true;
         }

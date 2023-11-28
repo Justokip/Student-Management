@@ -27,6 +27,10 @@ page 50105 StudentsRoleCenter
             {
                 RunObject = page "Students Setup";
             }
+            action("FeeStructure Report")
+            {
+                RunObject = report "Fee Structure Report";
+            }
         }
         area(Sections)
         {
@@ -62,12 +66,6 @@ page 50105 StudentsRoleCenter
                 {
                     RunObject = Page "Students Setup";
                 }
-                action("Fee Structure")
-                {
-                    RunObject = Page "Fee Structure List";
-                }
-
-
             }
             group(Administration)
             {
@@ -100,11 +98,18 @@ page 50105 StudentsRoleCenter
             }
             group(Finance)
             {
+                action("Fee Structure")
+                {
+                    RunObject = Page "Fee Structure List";
+                }
                 action("Student Invoice")
                 {
                     RunObject = page "Students Invoices";
                 }
-
+                action("Payments")
+                {
+                    RunObject = page "STDN Payment List";
+                }
             }
             group(Reports)
             {

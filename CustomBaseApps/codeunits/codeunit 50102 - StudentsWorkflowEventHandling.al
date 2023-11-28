@@ -5,11 +5,12 @@ codeunit 50102 "StdWorkflow Event Handling"
         StudentsAppSendForApprovalEventDescTxt: Label 'Approval  of a Student Application is Requested';
         StudentsAppCancelForApprovalEventDescTxt: Label 'Approval  of a Student Application is Canceled';
         WorkflowManagement: Codeunit "Workflow Management";
-        //student invoice
-        StudentInvoiceSendForApprovalEventDescTxt: Label 'Student Invoice is  send for Approval';
-        StudentInvoiceCancelForApprovalEventDescTxt: Label 'Student invoice is cancelled';
-        StudentInvoiceReleasedText: Label 'Student invoice Is Approved';
-        StudentInvoiceSendForRejectedEventDescTxt: Label 'Student invoice is  rejected';
+
+        // //student invoice
+        // StudentInvoiceSendForApprovalEventDescTxt: Label 'Student Invoice is  send for Approval';
+        // StudentInvoiceCancelForApprovalEventDescTxt: Label 'Student invoice is cancelled';
+        // StudentInvoiceReleasedText: Label 'Student invoice Is Approved';
+        // StudentInvoiceSendForRejectedEventDescTxt: Label 'Student invoice is  rejected';
 
 
 
@@ -21,11 +22,12 @@ codeunit 50102 "StdWorkflow Event Handling"
         StudentsAppSendForApprovalEventDescTxt, 0, FALSE);
         WorkflowEventHandling.AddEventToLibrary(RunWorkflowOnCancelStudentsAppForApprovalCode, DATABASE::"Student Application Table",
         StudentsAppCancelForApprovalEventDescTxt, 0, FALSE);
-        // Student Invoice
-        WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnSendStudentInvoiceForApprovalCode, Database::"Student Invoice", StudentInvoiceSendForApprovalEventDescTxt, 0, false);
-        WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnCancelStudentInvoiceApprovalCode, Database::"Student Invoice", StudentInvoiceCancelForApprovalEventDescTxt, 0, false);
-        WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnReleaseStudentInvoiceCode, Database::"Student Invoice", StudentInvoiceReleasedText, 0, false);
-        WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnRejectedStudentInvoiceApprovalCode, Database::"Student Invoice", StudentInvoiceSendForRejectedEventDescTxt, 0, false);
+        
+        // // Student Invoice
+        // WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnSendStudentInvoiceForApprovalCode, Database::"Student Invoice", StudentInvoiceSendForApprovalEventDescTxt, 0, false);
+        // WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnCancelStudentInvoiceApprovalCode, Database::"Student Invoice", StudentInvoiceCancelForApprovalEventDescTxt, 0, false);
+        // WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnReleaseStudentInvoiceCode, Database::"Student Invoice", StudentInvoiceReleasedText, 0, false);
+        // WorkflowEventHandling.AddEventToLibrary(RunWorkFlowOnRejectedStudentInvoiceApprovalCode, Database::"Student Invoice", StudentInvoiceSendForRejectedEventDescTxt, 0, false);
 
 
     end;
@@ -42,24 +44,25 @@ codeunit 50102 "StdWorkflow Event Handling"
 
                 WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendStudentsAppForApprovalCode);
         end;
-        //student invoice
-        case EventFunctionName of
-            RunWorkFlowOnCancelStudentInvoiceApprovalCode:
-                WorkflowEventHandling.AddEventPredecessor(RunWorkFlowOnCancelStudentInvoiceApprovalCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode);
 
-            RunWorkFlowOnRejectedStudentInvoiceApprovalCode:
-                WorkflowEventHandling.AddEventPredecessor(RunWorkFlowOnRejectedStudentInvoiceApprovalCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode);
+        // //student invoice
+        // case EventFunctionName of
+        //     RunWorkFlowOnCancelStudentInvoiceApprovalCode:
+        //         WorkflowEventHandling.AddEventPredecessor(RunWorkFlowOnCancelStudentInvoiceApprovalCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode);
 
-            WorkflowEventHandling.RunWorkFlowOnApproveApprovalRequestCode:
-                begin
-                    WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkFlowOnApproveApprovalRequestCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode)
-                end;
-            WorkflowEventHandling.RunWorkflowOnDelegateApprovalRequestCode:
-                begin
-                    WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkFlowOnDelegateApprovalRequestCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode)
-                end;
+        //     RunWorkFlowOnRejectedStudentInvoiceApprovalCode:
+        //         WorkflowEventHandling.AddEventPredecessor(RunWorkFlowOnRejectedStudentInvoiceApprovalCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode);
 
-        end;
+        //     WorkflowEventHandling.RunWorkFlowOnApproveApprovalRequestCode:
+        //         begin
+        //             WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkFlowOnApproveApprovalRequestCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode)
+        //         end;
+        //     WorkflowEventHandling.RunWorkflowOnDelegateApprovalRequestCode:
+        //         begin
+        //             WorkflowEventHandling.AddEventPredecessor(WorkflowEventHandling.RunWorkFlowOnDelegateApprovalRequestCode, RunWorkFlowOnSendStudentInvoiceForApprovalCode)
+        //         end;
+
+        // end;
     end;
 
     procedure RunWorkflowOnSendStudentsAppForApprovalCode(): Code[128]
@@ -84,45 +87,49 @@ codeunit 50102 "StdWorkflow Event Handling"
         WorkflowManagement.HandleEvent(RunWorkflowOnCancelStudentsAppForApprovalCode, Students);
 
     end;
-    //Invoice procedure
-    procedure RunWorkFlowOnSendStudentInvoiceForApprovalCode(): Code[128]
 
-    begin
-        exit(UpperCase('RunWorkFlowOnSendStudentInvoiceForApproval'))
 
-    end;
+    // //Invoice procedure
+    // procedure RunWorkFlowOnSendStudentInvoiceForApprovalCode(): Code[128]
 
-    procedure RunWorkFlowOnCancelStudentInvoiceApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkFlowOnCancelStudentInvoiceApproval'));
-    end;
+    // begin
+    //     exit(UpperCase('RunWorkFlowOnSendStudentInvoiceForApproval'))
 
-    procedure RunWorkFlowOnReleaseStudentInvoiceCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkFlowOnReleaseStudentInvoiceApproval'));
-    end;
+    // end;
 
-    procedure RunWorkFlowOnRejectedStudentInvoiceApprovalCode(): Code[128]
-    begin
-        exit(UpperCase('RunWorkFlowOnRejectedStudentInvoiceApproval'));
-    end;
-    //student invoice
-    [EventSubscriber(ObjectType::Codeunit,Codeunit::"Student Approval Management", 'OnSendStudentInvoiceForApproval', '', true, true)]
-    local procedure RunWorkFlowOnSendStudentInvoiceForApproval(var Applicant1: Record "Student Invoice")
-    begin
-        WorkFlowManagement.HandleEvent(RunWorkFlowOnSendStudentInvoiceForApprovalCode, Applicant1);
-    end;
+    // procedure RunWorkFlowOnCancelStudentInvoiceApprovalCode(): Code[128]
+    // begin
+    //     exit(UpperCase('RunWorkFlowOnCancelStudentInvoiceApproval'));
+    // end;
 
-    [EventSubscriber(ObjectType::Codeunit,Codeunit::"Student Approval Management", 'OnCancelStudentInvoiceForApproval', '', true, true)]
-    local procedure RunWorkFlowOnCancelStudentInvoiceForApproval(var Applicant1: Record "Student Invoice")
-    begin
-        WorkFlowManagement.HandleEvent(RunWorkFlowOnCancelStudentInvoiceApprovalCode, Applicant1);
-    end;
+    // procedure RunWorkFlowOnReleaseStudentInvoiceCode(): Code[128]
+    // begin
+    //     exit(UpperCase('RunWorkFlowOnReleaseStudentInvoiceApproval'));
+    // end;
 
-    trigger OnRun()
-    begin
+    // procedure RunWorkFlowOnRejectedStudentInvoiceApprovalCode(): Code[128]
+    // begin
+    //     exit(UpperCase('RunWorkFlowOnRejectedStudentInvoiceApproval'));
+    // end;
 
-    end;
+
+    // //student invoice
+    // [EventSubscriber(ObjectType::Codeunit,Codeunit::"Student Approval Management", 'OnSendStudentInvoiceForApproval', '', true, true)]
+    // local procedure RunWorkFlowOnSendStudentInvoiceForApproval(var Applicant1: Record "Student Invoice")
+    // begin
+    //     WorkFlowManagement.HandleEvent(RunWorkFlowOnSendStudentInvoiceForApprovalCode, Applicant1);
+    // end;
+
+    // [EventSubscriber(ObjectType::Codeunit,Codeunit::"Student Approval Management", 'OnCancelStudentInvoiceForApproval', '', true, true)]
+    // local procedure RunWorkFlowOnCancelStudentInvoiceForApproval(var Applicant1: Record "Student Invoice")
+    // begin
+    //     WorkFlowManagement.HandleEvent(RunWorkFlowOnCancelStudentInvoiceApprovalCode, Applicant1);
+    // end;
+
+    // trigger OnRun()
+    // begin
+
+    // end;
 
 }
 

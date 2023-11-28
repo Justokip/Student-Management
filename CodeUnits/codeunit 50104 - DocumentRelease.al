@@ -12,12 +12,21 @@ codeunit 50104 "Student Transfer"
         if StudentsRec."Application Status" = StudentsRec."Application Status"::Submitted then begin
             if (StudentsRec."Adm no." = '') then begin
                 StudentsRec."Adm no." := NoSeriesMng.GetNextNo(StudentSetupp."No.Seriess", 0D, true);
-                StudentsRec."Customer Type" := StudentsRec."Customer Type"::Students;
+                //StudentsRec."Customer Type" := StudentsRec."Customer Type"::Students;
                 StudentsRec.Modify();
             end;
             CustomerRec.INIT;
+            CustomerRec."Gen. Bus. Posting Group" := StudentSetupp."Gen.Bus Posting Group";
+            CustomerRec."VAT Bus. Posting Group" := StudentSetupp."VAT.Bus Posting Group";
+            CustomerRec."Customer Posting Group" := StudentSetupp."Customer Posting Group";
+
+            StudentsRec."Customer Type" := CustomerRec."Customer Type"::Students;
             CustomerRec.TransferFields(StudentsRec, true);
+
             CustomerRec.Insert();
+            // CustomerRec.INIT;
+            // CustomerRec.TransferFields(StudentsRec, true);
+            // CustomerRec.Insert();
 
         end;
     end;

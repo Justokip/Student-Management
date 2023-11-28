@@ -44,12 +44,25 @@ table 50103 "Students Setup"
             DataClassification = CustomerContent;
             TableRelation = "No. Series";
         }
+        field(14; "Fee Structure Code"; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Fee Structure Code';
+            TableRelation = "No. Series";
+        }
         field(15; "Invoice Code"; code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Invoice Code';
             TableRelation = "No. Series";
         }
+        field(16; "Payment NO."; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Receipt No.';
+            TableRelation = "No. Series";
+        }
+
         field(21; "Gen.Bus Posting Group"; Text[100])
         {
             DataClassification = CustomerContent;

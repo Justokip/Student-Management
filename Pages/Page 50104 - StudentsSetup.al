@@ -53,11 +53,53 @@ page 50104 "Students Setup"
                 field("Invoice Code"; Rec."Invoice Code")
                 {
                     ApplicationArea = All;
-
+                }
+                field("Payment NO."; Rec."Payment NO.")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the payment no. field.';
+                }
+                field("Fee Structure Code"; Rec."Fee Structure Code")
+                {
 
                 }
 
+            }
+            group(invoicing)
+            {
+                field("General Journal Batch"; Rec."General Journal Batch")
+                {
+                    ApplicationArea = All;
+                }
+                field("General Journal Template"; Rec."General Journal Template")
+                {
+                    ApplicationArea = All;
+                }
 
+                field("Invoicing GL Account"; Rec."Invoicing GL Account")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Invoicing GL Account field.';
+                }
+
+            }
+            group("Posting Groups")
+            {
+                field("Gen.Bus Posting Group"; Rec."Gen.Bus Posting Group")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Gen.Bus Posting Group field.';
+                }
+                field("VAT.Bus Posting Group"; Rec."VAT.Bus Posting Group")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the VAT.Bus Posting Group field.';
+                }
+                field("Customer Posting Group"; Rec."Customer Posting Group")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Customer Posting Group field.';
+                }
 
             }
         }

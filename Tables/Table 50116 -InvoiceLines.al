@@ -26,11 +26,11 @@ table 50116 "Invoice Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'Fee Structure Code';
+            TableRelation = "Fee Structure";
         }
         field(3; "Description"; code[50])
         {
             Caption = 'Description';
-            // TableRelation = "Fee Structure";
             DataClassification = CustomerContent;
         }
         field(59; "Amount"; Decimal)

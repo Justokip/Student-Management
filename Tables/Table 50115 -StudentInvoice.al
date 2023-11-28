@@ -25,13 +25,27 @@ table 50115 "Student Invoice"
         field(14; "Session Code"; Code[20])
         {
             DataClassification = CustomerContent;
-            Caption = 'Session Code';
-            TableRelation = "Student Semester Registration";
+            Caption = 'Entry Code';
+            //TableRelation = "Student Semester Registration";
+            trigger OnLookup()
+            var
+                StudentInvoice: Record "Student Semester Registration";
+            begin
+                if Page.RunModal(Page::"Student Semester Registration", StudentInvoice) = Action::LookupOK then begin
+                    Rec."session code" := StudentInvoice."Entry No.";
+                    Rec."Course Name" := StudentInvoice.Course;
+                    Rec."Academic Year" := StudentInvoice."Academic Year";
+                    Rec."Semester Name" := StudentInvoice.Semester;
+                    Rec."Application No." := StudentInvoice."Adm No.";
+                    Rec."Student Name" := StudentInvoice."Full Name";
+
+                end;
+            end;
         }
 
         field(2; "Application No."; Code[20])
         {
-            Caption = 'Admision No.';
+            Caption = 'Admission No.';
             DataClassification = CustomerContent;
             Editable = false;
             TableRelation = Customer where("Customer Type" = filter(students));
@@ -65,22 +79,28 @@ table 50115 "Student Invoice"
         {
             DataClassification = CustomerContent;
             Caption = 'Invoice Date';
+            Editable = false;
+
         }
         field(59; "Amount"; Decimal)
         {
             Caption = 'Invoiced Amount';
             FieldClass = FlowField;
             CalcFormula = sum("Invoice Lines".Amount where("Entry No." = field("Invoice Code")));
+            Editable = false;
+
         }
         field(9; "Posting Date"; Date)
         {
             Caption = 'Posting Date';
             DataClassification = CustomerContent;
+            NotBlank = true;
         }
         field(12; "Due Date"; Date)
         {
             Caption = 'Due Date';
             DataClassification = CustomerContent;
+            Editable = false;
         }
         field(10; "No. Series"; Code[50])
         {
@@ -91,7 +111,7 @@ table 50115 "Student Invoice"
         {
             DataClassification = CustomerContent;
             Caption = 'Approval Status';
-            Editable = false;
+            // Editable = false;
 
         }
         field(13; "Posted"; Boolean)
@@ -108,7 +128,7 @@ table 50115 "Student Invoice"
 
     keys
     {
-        key(PK; "Invoice Code")
+        key(PK; "Invoice Code", "Session Code")
         {
             Clustered = true;
 
@@ -126,6 +146,8 @@ table 50115 "Student Invoice"
         if "Invoice Code" = ' ' then
             StudentMgntSetup.TestField("Invoice Code");
         NoSeriesManagement.InitSeries(StudentMgntSetup."Invoice Code", xRec."No. Series", 0D, "Invoice Code", "No. Series");
-
+        "Due Date" := Today;
+        "Invoice Date" := Today;
+        "Posting Date" := Today;
     end;
 }

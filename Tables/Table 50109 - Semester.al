@@ -6,7 +6,7 @@ table 50119 "Semester Registration"
 
     fields
     {
-        field(1; "Semester code"; Code[10])
+        field(1; "Semester code"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Semester Code';

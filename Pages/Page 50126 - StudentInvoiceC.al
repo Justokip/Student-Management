@@ -21,19 +21,7 @@ page 50126 "Student Invoice"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the session Code field.';
-                    trigger OnLookup(var Text: Text): Boolean
-                    var
-                        StudentInvoice: Record "Student Semester Registration";
-                    begin
-                        if Page.RunModal(Page::"Approved Students List", StudentInvoice) = Action::LookupOK then
-                            Rec."session code" := StudentInvoice."Entry No.";
-                        Rec."Course Name" := StudentInvoice.Course;
-                        Rec."Academic Year" := StudentInvoice."Academic Year";
-                        Rec."Semester Name" := StudentInvoice.Semester;
-                        Rec."Application No." := StudentInvoice."Adm No.";
-                        Rec."Student Name" := StudentInvoice."Full Name";
 
-                    end;
                 }
                 field("Application No."; Rec."Application No.")
                 {
@@ -131,7 +119,7 @@ page 50126 "Student Invoice"
                     trigger OnAction()
                     begin
                         //Rec.Posted := true
-                        FinanceManagement.PostStudentInvoice(Rec);
+                        PaymentManagement.PostedStudInv(Rec);
                     end;
                 }
 
@@ -148,68 +136,16 @@ page 50126 "Student Invoice"
 
                     trigger OnAction()
                     begin
-                        FinanceManagement.PostStudentInvoice(Rec);
+                        PaymentManagement.PostedStudInv(Rec);
 
                     end;
                 }
 
-            }
-            group("Approvals9")
-            {
-                Caption = 'Approvals';
-                action(Request)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Send For Approvals';
-                    Promoted = true;
-                    PromotedCategory = Category7;
-                    PromotedIsBig = true;
-                    Image = Customer;
-                    ToolTip = 'Send for Student Invoice Approval';
-
-
-                    trigger OnAction()
-                    begin
-                        IF ApprovalMgt.CheckStudentInvoiceApprovalsWorkFlowEnable(Rec) THEN
-                            ApprovalMgt.OnSendStudentInvoiceForApproval(Rec);
-                    end;
-                }
-                action(Cancel)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Cancel For Approvals';
-                    Promoted = true;
-                    PromotedCategory = Category7;
-                    PromotedIsBig = true;
-                    Image = Customer;
-                    ToolTip = 'Cancel Student Invoice Approval';
-
-
-                    trigger OnAction()
-                    begin
-                        ApprovalMgt.OnCancelStudentInvoiceForApproval(Rec);
-                    end;
-                }
             }
         }
     }
-    trigger OnAfterGetRecord()
-    begin
-        OpenApprovalEntriesExistForCurrUser := ApproveMagt.HasOpenApprovalEntriesForCurrentUser(Rec.RECORDID);
-        OpenApprovalEntriesExist := ApproveMagt.HasOpenApprovalEntries(Rec.RECORDID);
-        CanCancelApprovalForRecord := ApproveMagt.CanCancelApprovalForRecord(Rec.RECORDID);
-        WorkflowWebhookMgt.GetCanRequestAndCanCancel(Rec.RECORDID, CanSendApprovalForFlow, CanCancelApprovalForFlow);
-    end;
 
     var
-        ApprovalMgt: Codeunit "Student Approval Management";
-        WorkFlowWebhookMgt: codeunit "Workflow Webhook Management";
-        OpenApprovalEntriesExistForCurrUser: Boolean;
-        OpenApprovalEntriesExist: Boolean;
-        CanCancelApprovalForRecord: Boolean;
-        CanCancelApprovalForFlow: Boolean;
-        CanSendApprovalForFlow: Boolean;
-        ApproveMagt: Codeunit "Approvals Mgmt.";
-        FinanceManagement: Codeunit "Finance Management";
+        PaymentManagement: Codeunit "Payment Management";
 
 }

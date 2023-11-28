@@ -34,11 +34,7 @@ page 50113 "Units line part"
                     ApplicationArea = All;
 
                 }
-
             }
         }
-
     }
-
-
 }

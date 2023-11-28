@@ -54,10 +54,12 @@ table 50111 "Student Semester Registration"
 
 
         }
-        field(5; Course; Code[50])
+        field(5; Course; Text[100])
         {
             DataClassification = ToBeClassified;
             Caption = 'Course Name';
+            Editable=false;
+            
 
         }
         field(6; School; Code[50])
@@ -90,7 +92,7 @@ table 50111 "Student Semester Registration"
 
     keys
     {
-        key(Key1; "Adm No.")
+        key(Key1; "Entry No.")
         {
             Clustered = true;
         }

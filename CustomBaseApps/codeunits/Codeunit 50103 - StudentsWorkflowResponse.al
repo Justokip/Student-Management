@@ -89,7 +89,6 @@ codeunit 50103 StudentWorkFlowEventResponse
                 end;
         end;
     end;
-
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Workflow Response Handling", 'OnAddWorkflowResponsePredecessorsToLibrary', '', true, true)]
     local procedure OnAddWorkflowResponsePredecessorsToLibrary(ResponseFunctionName: Code[128])
     var

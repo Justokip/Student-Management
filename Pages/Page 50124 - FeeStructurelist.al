@@ -64,16 +64,18 @@ page 50124 "Fee Structure List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Amount field.';
                 }
-                field("Bal.Account Type"; Rec."Bal.Account Type")
+                field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the type of balancing account in the field.';
+                    ToolTip = 'Specifies the value of the account Type';
+
                 }
-                field("Balancing Acc. No."; Rec."Balancing Acc. No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the balancing account number of the field';
+                    ToolTip = 'Specifies the value of the Account Number';
                 }
+
             }
         }
     }

@@ -17,6 +17,11 @@ page 50127 "Invoice Lines"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Entry No. field.';
                 }
+                field("Fee Structure Code"; Rec."Fee Structure Code")
+                {
+                    ApplicationArea = All;
+
+                }
                 field("Description"; Rec."Description")
                 {
                     ApplicationArea = All;

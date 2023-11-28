@@ -46,7 +46,6 @@ page 50120 "Sem Registration Card"
                 {
                     ApplicationArea = all;
                     Caption = 'Course';
-                    Editable = false;
                 }
 
                 field(School; Rec.School)
@@ -72,8 +71,7 @@ page 50120 "Sem Registration Card"
             {
                 Caption = 'Register Units';
                 ApplicationArea = All;
-                SubPageLink = "Entry No." = field("Adm No."), Semester = field(Semester),
-                "Course Name" = field(Course);
+                SubPageLink = "Entry No." = field("Adm No."), Semester = field(Semester), "Course Name" = field(Course);
             }
         }
     }
